@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Acrocatic Documentation</title>
+  <style>
+  body { text-align: center; background: #efefef; }
+  #wrapper { width: 50%; margin: 0 auto; text-align: left; }
+  h2, h3, h4 { margin-bottom: 0px; margin-top: 1.2em; }
+  p { margin: 0.5em 0 1em 0; }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Acrocatic Documentation</h1>
+    <p>This README includes the documentation for using Acrocatic. Be sure to check out our website (http://battlebrothers.io/acrocatic/) to see the full documentation, including images and YouTube videos.</p>
+  
+    <h2 id="installation">Installation</h2>
+    <p>It should just work right off the bat when you buy and install Acrocatic from the <a href="https://www.assetstore.unity3d.com/#/content/17420" target="_blank">Unity Asset Store</a>. Granted you're using Unity 4.5 or higher! If it doesn't work or you have any questions, feel free to e-mail us at <a href="mailto:support@battlebrothers.io">support@battlebrothers.io</a> or submit a post in the <a href="http://forum.unity3d.com/threads/244724-RELEASED-Acrocatic-Highly-customizable-2D-platforming-character" target="_blank">forum thread</a>.</p>
+
+    <h2 id="demo">Demo</h2>
+    <p>Want to try out Acrocatic? <a href="demo" target="_blank">Click here</a> to check out a few demo's we made using Acrocatic. Want to know how to use Acrocatic? Be sure to read the documentation below or watch <a href="http://www.youtube.com/playlist?list=PLwqtIRtHhpa9D_ItSzy5roXKZ77pOnoqF" target="_blank">these YouTube videos</a>.</p>
+
+    <h2 id="scripts">Scripts</h2>
+    <p>There are several scripts included in Acrocatic. These are located under Assets/Acrocatic/Scripts. You can customize the variables in Unity or you can dive into the code yourself to create your own unique character. All scripts are written in C# and are heavily commented.</p>
+
+    <h3 id="player-scripts">Player scripts</h3>
+    <p>The player scripts (located in the Player subdirectory) are the most important scripts. These handle character movement, jumping, wall running, wall sliding, wall jumping and much more. It allows you to define a lot of different options to create your own uniquely controlled character. You can easily enable or disable scripts to add or remove mechanics.</p>
+
+    <p>
+      <strong>Player.cs</strong><br/>
+      This is the player's base class. This class is used to communicate between all the other classes. There are a few public variables you can change in the inspector.
+      <br/><br/>
+      <u>Sprite Direction</u> determines in which direction the sprites are facing. This allows you to use sprites that face left OR right.
+      <br/><br/>
+      <u>Platform Layer</u> determines which layer should be considered as a platform the player can interact with. This is the Platforms layer by default.
+      <br/><br/>
+      <u>Ground Layer</u> determines which layer should be considered as the ground the player can stand on. This is the Ground layer by default.
+      <br/><br/>
+      <u>Ground Radius</u> determines the radius of the circle created at the feet of the player (the groundCheck object) to see if the player is grounded. When something on the Ground Layer overlaps with this circle, the player is considered grounded.
+      <br/><br/>
+      <u>Rotate on Slope</u> determines if the player should rotate based on the platform when on a slope.
+      <br/><br/>
+      <u>Move After Death</u> allows you to enable or disable movement after colliding with the Death prefab.
+      <br/><br/>
+      <u>Keep Velocity On Ground</u> is an experimental feature you can enable to ignore friction while running and jumping. It is turned off by default.
+      <br/><br/>
+      <u>Grounded Velocity Time</u> is used for the experimental feature explained above. It sets the timer for ignoring the friction. Make sure this is a low number (0.05 is default).
+      <br/><br/>
+    </p>
+
+    <p>
+      <strong>PlayerHitbox.cs</strong><br/>
+      This class is used to set the hitbox for different states. By default Acrocatic has a default, crouching and jumping hitbox. These hitboxes are simple box colliders. Change these values based on the sprites you're using for your game. You can also change the circle collider if you want to. Check out the script to see how you can achieve this.
+      <br/><br/>
+      When the hitboxes have different widths, you have to change a few extra things. In the PlayerHitbox class, a few lines of code are commented out that handle changing hitbox widths. Make sure you activate this code when the hitboxes you use have different widths.
+      <br/><br/>
+    </p>
+
+    <div class="clear"></div>
+
+    <p>
+      <strong>PlayerCrouch.cs</strong><br/>
+      This class handles all crouching and sliding. You can even add 'air sliding'!
+      <br/><br/>
+      <u>Allow Movement</u> determines if the player can move during a crouch. Enabling this will allow the player to move around while crouching.
+      <br/><br/>
+      <u>Crouch Speed</u> sets the speed while moving during a crouch. This is only used when Allow Movement is set to true.
+      <br/><br/>
+      <u>Allow Running Slide</u> determines if the player should slide when running and pressing the Crouch input. Sliding is like a dash in crouch position with a different animation.
+      <br/><br/>
+      <u>Allow Crouched Slide</u> determines if the player is allowed to slide while standing still or moving in crouch position. The player has to press the Dash input while in crouch position to activate this slide.
+      <br/><br/>
+      <u>Allow Air Slide</u> determines if the player can perform a slide while in the air. This slide can also have a downwards force, allowing the player to get to the ground as quickly as possible.
+      <br/><br/>
+      <u>Slide Force</u> is the X force for the slide. The higher the force, the faster the player slides.
+      <br/><br/>
+      <u>Slide Time</u> is the duration (in seconds) of the slide.
+      <br/><br/>
+      <u>Cooldown Time</u> is the time (in seconds) it takes for the player to slide again. Set this to 0 if you want the player to slide immediately after a slide.
+      <br/><br/>
+      <u>Air Slide Force</u> is a Vector2 that allows you to set the X and Y slide force while in the air. This overrides the Slide Force variable.
+    </p>
+
+    <p>
+      <strong>PlayerDash.cs</strong><br/>
+      This class is used for the Dash mechanic. You can enable or disable this class to allow or disallow dashing.
+      <br/><br/>
+      <u>Dash Force</u> is the X force for the dash. The higher the force, the faster the player dashes.
+      <br/><br/>
+      <u>Dash Time</u> is the duration (in seconds) of the dash.
+      <br/><br/>
+      <u>Cooldown Time</u> is the time (in seconds) it takes for the player to dash again. Set this to 0 if you want the player to dash immediately after a dash.
+      <br/><br/>
+      <u>Dash Gravity</u> determines if the player should be affected by gravity while dashing. When this is set to false, the Dash Y Velocity will be used for the player's Y velocity during a dash.
+      <br/><br/>
+      <u>Dash Y Velocity</u> is used when Dash Gravity is false. It sets the player's Y velocity while dashing. Its default value is 0.4. This is needed to make sure the player isn't slowly moving downwards.
+      <br/><br/>
+      <u>Air Dash</u> determines if dashing is allowed while in the air.
+      <br/><br/>
+      <u>Air Dash Limit</u> can be used to set a limit to the amount of air dashing. Only want the player to dash in the air twice? Set this value to true and the Air Dash Total variable to 2.
+      <br/><br/>
+      <u>Air Dash Total</u> is used to set the total air dashes when Air Dash Limit is set to true. Setting this to 1 will only allow 1 air dash.
+    </p>
+
+    <p>
+      <strong>PlayerJump.cs</strong><br/>
+      This class handles all player jumping. It also allows the player to double jump and gives control over how this double jump is handled.
+      <br/><br/>
+      <u>Jump Type</u> determines what kind of jump the player should perform. There are two options: Single Press to Jump and Hold to Jump Higher. Different variables will be used depending on this variable.
+      <br/><br/>
+      <u>Single Press to Jump - Jump Force</u> is the Y force that should be added to the player when he's jumping.
+      <br/><br/>
+      <u>Single Press to Jump - Double Jump Force</u> is used instead of Jump Force when the player is trying to perform a double jump. You can use the same value, but also change it to suit your needs.
+      <br/><br/>
+      <u>Hold to Jump Higher - Initial Jump</u> is the initial jump's Y velocity change. This is used when the player starts pressing the jump button.
+      <br/><br/>
+      <u>Hold to Jump Higher - Initial Double Jump</u> is the same as above, but for a double jump.
+      <br/><br/>
+      <u>Hold to Jump Higher - Jump Time</u> is the duration for the jump. The player can hold down the jump button during this duration to apply the jump force.
+      <br/><br/>
+      <u>Hold to Jump Higher - Jump Force</u> is the force applied to the player while holding down the jump button, allowing the player to jump higher when holding down the jump button.
+      <br/><br/>
+      <u>Hold to Jump Higher - Double Jump Force</u> is the same as above, but for a double jump.
+      <br/><br/>
+      <u>Total Jumps</u> allows you to set the total amount of jumps the player can do in the air. When you want the player to perform several jumps in the air, make sure this value is higher than 1. Don't want any double jumping? Set this value to 1. If you want, you can even set this value to 999! When the player hits the ground or interacts with a wall, the total jumps allowed is reset and the jumping can start all over again.
+      <br/><br/>
+      <u>Jump Window</u> is used to determine if there's a double jumping window. Only want to allow a double jump when the current jump is at its peak? Simply set this variable to true and change the values below. When you set this value to false, the player can double jump at any time while in the air (and allowed to double jump of course).
+      <br/><br/>
+      <u>Jump Window Min and Max</u> are used to set the Jump Window. These correspond to the Y velocity of the player, so make sure you set the values appropriately.
+      <br/><br/>
+      <u>Change Factor</u> is used to determine how much the player is allowed to change course while in the air. Setting this to a low value will make sure the player isn't really able to change the course of the jump. Setting this to a higher value will allow you faster control over air movement.
+      <br/><br/>
+      <u>Speed Factor</u> is used to change the player's speed while in the air. Setting this to a lower value will slow down the player while in the air. A higher value will make air movement faster than ground movement.
+      <br/><br/>
+      <u>Walk and Run</u> gives you control over walking and running in the air. Disabling this makes sure the player isn't able to change between those states while in the air. So when you start a jump while walking, you can't suddenly get the sprinting speed when pressing the sprint button.
+      <br/><br/>
+      <u>Reset on Wall</u> resets the above behaviour when interacting with a wall. So you can 'walk-jump' on a wall and then 'sprint-jump' from the wall.
+    </p>
+
+    <p>
+      <strong>PlayerRun.cs</strong><br/>
+      This class handles the player's normal movement: walking and running. You can change the following variables in the inspector.
+      <br/><br/>
+      <u>Press To Run</u> is a boolean. Set this to true if you want the player to walk by default and require a button press to run (the Run input). If this is false, the player runs by default.
+      <br/><br/>
+      <u>Walk Speed</u> is used to set the player's maximum walking speed. The higher the speed, the faster the player moves. This variable is only used when Press To Run is set to true.
+      <br/><br/>
+      <u>Run Speed</u> is the same as Walk Speed, but is used for the player's maximum running speed. When Press To Run is false, this speed will be used. When Press To Run is true, this speed will only be used if the player holds down the Run input.
+      <br/><br/>
+      <u>Move Force</u> determines the amount of X force that should be added to the character. The Walk and Run Speed variables are used to make sure the player isn't moving faster than the maximum speed.
+    </p>
+
+    <p>
+      <strong>PlayerWall.cs</strong><br/>
+      This class handles all the wall sticking, running, sliding and jumping.
+      <br/><br/>
+      <u>Wall Layer</u> is used to select the layer for the wall colliders. Colliding with these walls will allow the player to interact with them.
+      <br/><br/>
+      <u>Should Fall</u> is used to determine if the player should fall down when wall interaction failed  or has completed. For example: when wall jumping fails (the player is too slow) you can make sure the player can't interact with a wall again by setting this to true. A different animation will be shown and the player simply falls down and isn't able to jump, dash or interact with walls.
+      <br/><br/>
+      <u>Jump To Stick</u> can be set to true to only allow wall interaction while in the air. You can also set this to false if you want the player to run up a wall while on the ground.
+      <br/><br/>
+      <u>Wall Unstick Time</u> is the time (in seconds) allowed between sticking to the wall and trying to wall jump. Wall jumping can be achieved by moving in the opposite direction and then pressing the Jump input. However, the time between being stuck to the wall and moving in the opposite direction is variable. This timer starts running when the player stops moving in the direction of the wall he's facing. This timer is used to make sure the player doesn't fall down when trying to wall jump. When the value is 0.1, it will take 0.1 seconds before the player falls down when the player isn't moving in the direction of the wall. So the player has 0.1 seconds to move to the opposite direction. If the player is successful and wall jumping is enabled, another timer will take over: Wall Stick Time (see below).
+      <br/><br/>
+      <u>Wall Jump - Enabled</u> determines if wall jumping is enabled. Wall jumping can be achieved by moving in the opposite direction of the wall you're facing.
+      <br/><br/>
+      <u>Wall Jump - Wall Stick Time</u> is used to determine how long (in seconds) the player sticks to the wall when trying to wall jump (so after the player moves in the opposite direction). Pressing the Jump input will trigger the wall jump. The higher this value, the easier it is for the player to perform a wall jump.
+      <br/><br/>
+      <u>Wall Jump - Wall Stick Velocity</u> is used to make sure the player stays at the same position while being stuck to the wall. You can also make the player move downwards by giving this a negative value.
+      <br/><br/>
+      <u>Wall Jump - Allow Double Jump</u> determines if a double jump is allowed after wall jumping.
+      <br/><br/>
+      <u>Wall Jump - Boomerang Jump</u> determines if boomerang wall jumping is enabled or disabled. Boomerang wall jumping can be achieved by moving in the samen direction as the curreny wall you're facing and then pressing the jump button. It moves the player away from the wall and makes him come back. You can cancel the boomerang wall jump by simply changing direction while in the air.
+      <br/><br/>
+      <u>Wall Jump - Boomerang Time</u> is the duration for moving in the opposite direction. Setting this to a higher value will make the player move more away from the wall before coming back.
+      <br/><br/>
+      <u>Wall Jump - Boomerang Factor X</u> allows you to change the player's X movement speed while performing the boomerang wall jump.
+      <br/><br/>
+      <u>Wall Jump - Boomerang Factor Y</u> allows you to change the player's Y movement speed while performing the boomerang wall jump.
+      <br/><br/>
+      <u>Wall Jump - Allow Same Wall</u> can be set to true if you want the player to wall jump on the same wall. If you don't want this you can set this to false. Acrocatic remembers the instance ID of each wall you're interacting with and on which side you've interacted with it. This data is used to determine if you're interacting with the same wall or not.
+      <br/><br/>
+      <u>Wall Run - Enabled</u> determines if wall running is enabled. Wall running can be achieved by simply running against a wall.
+      <br/><br/>
+      <u>Wall Run - Run Time</u> is the duration (in seconds) of the wall run. You can set this as high as you want.
+      <br/><br/>
+      <u>Wall Run - Run Speed</u> is the speed while wall running.
+      <br/><br/>
+      <u>Wall Run - Infinite Run</u> can be activated to allow infinite wall running. The Run Time will be ignored.
+      <br/><br/>
+      <u>Wall Run - Run Slowdown</u> can be activated to make the player automatically slow down while wall running. The Run Speed will be lowered based on the Run Time. This option will not work in combination with Infinite Run.
+      <br/><br/>
+      <u>Wall Run - Allow Same Wall</u> can be set to true if you want the player to wall run on the same wall. If you don't want this you can set this to false. Acrocatic remembers the instance ID of each wall you're interacting with and on which side you've interacted with it. This data is used to determine if you're interacting with the same wall or not.
+      <br/><br/>
+      <u>Wall Slide - Enabled</u> determines if wall sliding is enabled. Wall sliding starts after wall running or after making contact with the wall when wall running is turned off.
+      <br/><br/>
+      <u>Wall Slide - Slide Time</u> is the time (in seconds) it takes for the player to slide down. When the timer is finished, the player will fall down (based on the Should Fall variable).
+      <br/><br/>
+      <u>Wall Slide - Slide Speed</u> is the speed while wall sliding.
+      <br/><br/>
+      <u>Wall Slide - Infinite Slide</u> can be activated to allow infinite wall sliding. The Slide Time will be ignored.
+      <br/><br/>
+      <u>Wall Slide - Slide Speedup</u> can be activated to make the player automatically speed up while wall sliding. The Slide Speed will be increased based on the Run Time. This option also works with Infinite Slide.
+      <br/><br/>
+      <u>Wall Slide - Allow Same Wall</u> can be set to true if you want the player to wall slide on the same wall. If you don't want this you can set this to false. Acrocatic remembers the instance ID of each wall you're interacting with and on which side you've interacted with it. This data is used to determine if you're interacting with the same wall or not.
+    </p>
+
+    <p>
+      <strong>PlayerPlatform.cs</strong><br/>
+      This class handles the player's interaction with platforms.
+      <br/><br/>
+      <u>Moving Platform - Stick To X</u> allows you to make the player stuck to the X velocity of the moving platform. So you don't fall off when the platform is changing direction.
+      <br/><br/>
+      <u>Moving Platform - Stick To Y</u> allows you to make the player stuck to the Y velocity of the moving platform. So you don't fall off when the platform is changing direction.
+      <br/><br/>
+      <u>Moving Platform - Use Friction</u> determines if the player should use the moving platform's friction. Enabling this allows you to use icy platforms.
+      <br/><br/>
+      <u>Moving Platform - Keep Speed On Jump</u> determines if the player should keep the X speed of the moving platform when jumping.
+    </p>
+
+    <p>
+      <strong>PlayerLadder.cs</strong><br/>
+      This class handles the player's interaction with ladders.
+      <br/><br/>
+      <u>Ladder Layer</u> sets the layer that should be used for ladders. The default layer is called Ladders.
+      <br/><br/>
+      <u>Snap Speed</u> sets the snapping speed when snapping to the middle of the ladder is enabled.
+      <br/><br/>
+      <u>Climbing Speed Up</u> sets the player's speed when moving up the ladder.
+      <br/><br/>
+      <u>Climbing Speed Down</u> sets the player's speed when moving down the ladder.
+      <br/><br/>
+      <u>Climbing Speed Left</u> sets the player's speed when moving to the left on the ladder.
+      <br/><br/>
+      <u>Climbing Speed Right</u> sets the player's speed when moving to the right on the ladder.
+    </p>
+
+    <h3 id="platform-scripts">Platform scripts</h3>
+    <p>The platform scripts are located in the Platforms subdirectory. They control everything related to platforms.</p>
+
+    <p>
+      <strong>Platform.cs</strong><br/>
+      This class handles the platform's basic functionality.
+      <br/><br/>
+      <u>Platform Types</u> determines what kind of platform the player is interacting with. You can set multiple platform types.
+    </p>
+
+    <p>
+      <strong>PlatformMove.cs</strong><br/>
+      This class handles the moving platform's functionality.
+      <br/><br/>
+      <u>Speed</u> sets the platform's speed.
+      <br/><br/>
+      <u>Stop</u> makes the platform stop when enabled.
+      <br/><br/>
+      <u>Move On Hit</u> makes the platform move when the player stands on it and stop when the player isn't standing on it.
+      <br/><br/>
+      <u>Loop</u> makes the platform loop through all the waypoints. So when the platform is at the last waypoint, the platform will move towards the very first waypoint. If this is disabled, the platform will move backwards and move to the previous waypoint.
+      <br/><br/>
+      <u>Move Forward</u> determines how the platform should move through all the waypoints. If this is enabled, the player is moving from one waypoint to the next. When this is disabled, the platform will move through the waypoints backwards.
+      <br/><br/>
+      <u>Current Index</u> allows you to set a starting waypoint index for the platform.
+      <br/><br/>
+      <u>Stop After Total</u> determines after how many waypoints the platform should stop moving. When there are two waypoints and you set this value to 2, the platform will stop at the second waypoint.
+      <br/><br/>
+      <u>Wait At Waypoint Time</u> determines how long the platform waits at a waypoint. Set this to 0 to ignore this feature.
+      <br/><br/>
+      <u>Waypoints</u> is an array containing all the waypoint game objects. The order of the array is important, because it's used to determine the next waypoint the platform should move towards.
+    </p>
+
+    <p>
+      <strong>PlatformSink.cs</strong><br/>
+      This class handles the sinking platform's functionality.
+      <br/><br/>
+      <u>Sink On Hit</u> determines if the platform should sink when the player stands on it. A timer will run to determine when the platform should sink.
+      <br/><br/>
+      <u>Stop Timer When Gone</u> stops the timer when the player leaves the platform. So the platform will only sink when the player is standing on it.
+      <br/><br/>
+      <u>Reset Timer When Gone</u> does the same thing, but resets the timer.
+      <br/><br/>
+      <u>Time</u> sets the duration of the timer. Setting this to 0 will make the platform sink instantly.
+      <br/><br/>
+      <u>Reset Position</u> determines if the platform should reset to its original position after it fell.
+      <br/><br/>
+      <u>Reset Time</u> sets the duration of the timer for resetting the position.
+      <br/><br/>
+      <u>Shake Camera</u> allows you to shake the camera when contact has been made with the platform.
+      <br/><br/>
+      <u>Shake When Sinking</u> allows you to only shake the camera when the platform is actually sinking.
+      <br/><br/>
+      <u>Shake Time</u> sets the duration for the camera shake.
+      <br/><br/>
+      <u>Shake Amount</u> sets the shake's intensity.
+    </p>
+    
+    <p>
+      <strong>PlatformJumpThrough.cs</strong><br/>
+      This class handles the jump through platform's functionality.
+      <br/><br/>
+      <u>Top Of Ladder</u> determines if the platform is the top of a ladder. It is used to 'fall' through the ladder when only moving downwards. If this is disabled, you also have to press the 'jump' button to jump down the platform.
+      <br/><br/>
+      <u>Platforms</u> allows you to drag GameObjects that need to be disabled when trying to jump through the platform. This is used to disable the collisions.
+    </p>
+
+    <h3 id="general-scripts">General scripts</h3>
+    <p>
+      In the Scripts directory there is a subdirectory for all 'General' scripts. These are used by Acrocatic to make sure everything works purrrfect!
+      <br/><br/>
+      <strong>CameraFollow.cs</strong><br/>
+      This is the same script used in the 2D platforming example created by Unity. This is used to follow the player around with some smoothing. It is attached to the camera, so you can change it to your own liking.
+      <br/><br/>
+      <strong>Death.cs</strong><br/>
+      This script handles death. Currently it's attached to the Death prefab. This prefab is a trigger and restarts the game after 1 second when the player collides with it.
+      <br/><br/>
+      <strong>GameSettings.cs</strong><br/>
+      This is a general singleton class used for all global game settings. You can add settings to this class yourself. This class can be easily called from inside other classes (check out ShowCollider for how it's done). There is an empty Settings object inside Scene1 with this script attached. You can easily change the variables in the inspector.
+      <br/><br/>
+      <strong>ShowCollider.cs</strong><br/>
+      This class is added to all Collider prefabs. It uses the showColliders variable inside GameSettings to determine if the sprites for these prefabs should be loaded.
+      <br/><br/>
+      <strong>CameraShake.cs</strong><br/>
+      This class is added to the Camera. It allows you to shake the camera at will for a specific duration and amount.
+      <br/><br/>
+      <strong>Ladder.cs</strong><br/>
+      This class is used to determine how the ladder works. You can make the player snap to the middle of the ladder and allow jumping or double jumping from the ladder. It's also possible to set a default X or Y speed for the ladder and disable movement in certain directions. Another great feature is the ability to enable or disable falling off the ladder from all directions. So you can make sure the player can't fall off when moving to the left.
+    </p>
+
+    <h2 id="animator">Animator</h2>
+    <p>Acrocatic includes an animator for the player. This animator uses several parameters to show the correct animation. The animator uses several simple sprites and animations to showcase the movement. You should load your own sprites into these animations to customize it to your own liking. All animations are located under Assets/Acrocatic/Animations. Check out the animator to see how animations are called.</p>
+
+    <h2 id="prefabs">Prefabs</h2>
+    <p>There are several prefabs in Acrocatic you can use to create your levels. These are located under Assets/Acrocatic/Prefabs.</p>
+
+    <h3 id="player">Player</h3>
+    <p>
+      First of all you have the Player prefabs. These prefabs include a player character with the Player scripts inside Acrocatic. There is a PlayerComplex and a PlayerBasic prefab. The complex one has all scripts enabled. The basic one only has a few basic scripts enabled. Make sure you use these prefabs and customize it to your own liking.
+      <br/><br/>
+      The Player prefabs also include a groundCheck object that determines where the feet of the player are located. This is used to check if the player is grounded.
+    </p>
+
+    <h3 id="colliders">Colliders</h3>
+    <p>
+      In the Prefabs directory, there's a subdirectory called 'Colliders'. In this directory there are several prefabs that can help you create the colliders you need for your scene.
+    </p>
+    <p>
+      <strong>Platform</strong><br/>
+      This is the most important collider you can use to create all platforms in your game. Add the prefab to your scene and change the scale and position to fit your needs. The player character uses these colliders to walk around the level.
+      <br/><br/>
+      <strong>Ice</strong><br/>
+      This works the same as the Platform prefab, but uses a physics material with a lower friction, simulating ice.
+      <br/><br/>
+      <strong>Wall</strong><br/>
+      Need a wall inside your game? You're at the right place with the Wall prefab! This prefab is used to determine all walls inside your scene. The player character can use these walls to wall run, wall slide and wall jump. Don't want that? Use the Side prefab!
+      <br/><br/>
+      <strong>Side</strong><br/>
+      This is the same prefab as the Wall, but without wall interaction. This wall has very low friction, so the player just slides off it. Very useful when you need walls that can't be interacted with.
+      <br/><br/>
+      <strong>Ladder</strong><br/>
+      This is a prefab you can use to create a ladder. It uses the Ladder script to determine how the ladder should work.
+      <br/><br/>
+      <strong>Death</strong><br/>
+      This is a trigger used to let the player die and restart the level. You can customize what happens when the player dies in the Death script.
+      <strong>Bouncy</strong><br/>
+      Simple prefab used to make something bouncy. Very basic at the moment.
+      <br/><br/>
+      <strong>Bouncy</strong><br/>
+      Simple prefab used to make something bouncy. Very basic at the moment.
+      <br/><br/>
+      <strong>JumpThroughDown/Up</strong><br/>
+      These prefabs are used to make jump through platforms.
+    </p>
+
+    <h3 id="platforms">Platforms</h3>
+    <p>
+      In the Prefabs directory, there's a subdirectory called 'Platforms'. The moving and sinking platforms are located in this directory.
+    </p>
+    <p>
+      <strong>NormalPlatform</strong><br/>
+      This is a normal platform. Nothing special about it.
+      <br/><br/>
+      <strong>MovingPlatform</strong><br/>
+      This is a moving platform. It has several game objects as children of the object. The Platform child has the PlatformMove script attached to it. Colliders are in a seperate child called Colliders.
+      <br/><br/>
+      <strong>SinkingPlatform</strong><br/>
+      This is a sinking platform. The PlatformSink script is attached to the object directly. Colliders are also inside a seperate child called Colliders.
+      <br/><br/>
+      <strong>JumpThroughPlatform</strong><br/>
+      This is a platform you can jump through from below and above. Jumping down can be done by moving downwards and pressing the jump button. When you're already in the air, you only need to move downwards to fall through the platform.
+      <br/><br/>
+      <strong>MultiPlatform</strong><br/>
+      This is a jump through platform that also moves.
+      <br/><br/>
+      <strong>BouncePlatform</strong><br/>
+      This is a bouncy platform. Really simple at the moment. Future versions will have more features.
+    </p>
+    
+    <h3 id="other">Other</h3>
+    <p>
+      In the Prefabs directory, there's a subdirectory called 'Other'.
+    </p>
+    <p>
+      <strong>Ladder</strong><br/>
+      This is a simple ladder with the ability to stand on top of it.
+      <br/><br/>
+      <strong>Fence</strong><br/>
+      This is a bunch of ladders next to each other you can also move on horizontally.
+    </p>
+    
+    <h3 id="platforms">Waypoint</h3>
+    <p>
+      There is also a waypoint prefab. You can use this prefab to add waypoints for your moving platforms.
+    </p>
+
+
+    <h2 id="layers">Layers</h2>
+    <p>
+      These are used inside the scripts to determine what kind of collider the player is interacting with. So make sure you don't delete them! You have four layers: Ground, Walls, Platforms and Ladders. When you add new colliders, you have to make sure you add them to the right Layer (or you create a new one).
+    </p>
+
+    <h2 id="sorting-layers">Sorting Layers</h2>
+    <p>These layers are for sorting the 2D sprites. Acrocatic has the following Sorting Layers by default:</p>
+    <ol>
+      <li>Background</li>
+      <li>Foreground</li>
+      <li>Player</li>
+      <li>Platforms</li>
+      <li>Colliders</li>
+    </ol>
+    <p>Be sure to add your objects to the right sorting layer.</p>
+
+    <h2 id="input">Input</h2>
+    <p>The input used inside Acrocatic isn't the default one. We added Dash, Run and Crouch inputs and changed some other variables. Be sure to check it out to see what the controls are.</p>
+  </div>
+</body>
+</html>
