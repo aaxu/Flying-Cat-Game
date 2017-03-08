@@ -1,12 +1,19 @@
 fileFormatVersion: 2
 guid: 0da3d35f11a44407785d1c028df28dd2
 TextureImporter:
-  serializedVersion: 2
+  fileIDToRecycleName:
+    21300000: PlayerJumpAndFall_0
+    21300002: PlayerJumpAndFall_1
+    21300004: PlayerJumpAndFall_2
+    21300006: PlayerJumpAndFall_3
+    21300008: PlayerJumpAndFall_4
+    21300010: PlayerJumpAndFall_5
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -14,11 +21,12 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -34,18 +42,39 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings:
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   - buildTarget: iPhone
     maxTextureSize: 1024
-    textureFormat: -2
+    textureFormat: 2
+    textureCompression: 1
     compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: PlayerJumpAndFall_0
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_0
       rect:
         serializedVersion: 2
         x: 3
@@ -53,8 +82,12 @@ TextureImporter:
         width: 233
         height: 148
       alignment: 9
-      pivot: {x: .620000005, y: .5}
-    - name: PlayerJumpAndFall_1
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_1
       rect:
         serializedVersion: 2
         x: 248
@@ -62,8 +95,12 @@ TextureImporter:
         width: 230
         height: 162
       alignment: 9
-      pivot: {x: .620000005, y: .5}
-    - name: PlayerJumpAndFall_2
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_2
       rect:
         serializedVersion: 2
         x: 492
@@ -71,8 +108,12 @@ TextureImporter:
         width: 210
         height: 172
       alignment: 9
-      pivot: {x: .620000005, y: .5}
-    - name: PlayerJumpAndFall_3
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_3
       rect:
         serializedVersion: 2
         x: 3
@@ -80,8 +121,12 @@ TextureImporter:
         width: 223
         height: 156
       alignment: 9
-      pivot: {x: .620000005, y: .5}
-    - name: PlayerJumpAndFall_4
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_4
       rect:
         serializedVersion: 2
         x: 244
@@ -89,8 +134,12 @@ TextureImporter:
         width: 208
         height: 156
       alignment: 9
-      pivot: {x: .620000005, y: .5}
-    - name: PlayerJumpAndFall_5
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerJumpAndFall_5
       rect:
         serializedVersion: 2
         x: 492
@@ -98,6 +147,12 @@ TextureImporter:
         width: 200
         height: 160
       alignment: 9
-      pivot: {x: .620000005, y: .5}
+      pivot: {x: 0.62, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

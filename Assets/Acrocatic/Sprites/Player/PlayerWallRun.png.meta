@@ -1,12 +1,17 @@
 fileFormatVersion: 2
 guid: 8b9ebe40ef6604dd691071dcbf4ab489
 TextureImporter:
-  serializedVersion: 2
+  fileIDToRecycleName:
+    21300000: PlayerWallRun_0
+    21300002: PlayerWallRun_1
+    21300004: PlayerWallRun_2
+    21300006: PlayerWallRun_3
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -14,11 +19,12 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -34,19 +40,39 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings:
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   - buildTarget: iPhone
     maxTextureSize: 1024
-    textureFormat: -2
+    textureFormat: 2
+    textureCompression: 1
     compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: PlayerWallRun_0
+    - serializedVersion: 2
+      name: PlayerWallRun_0
       rect:
         serializedVersion: 2
         x: 8
@@ -54,9 +80,12 @@ TextureImporter:
         width: 168
         height: 246
       alignment: 9
-      pivot: {x: .769999981, y: .689999998}
+      pivot: {x: 0.77, y: 0.69}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PlayerWallRun_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerWallRun_1
       rect:
         serializedVersion: 2
         x: 194
@@ -64,9 +93,12 @@ TextureImporter:
         width: 171
         height: 246
       alignment: 9
-      pivot: {x: .769999981, y: .689999998}
+      pivot: {x: 0.77, y: 0.69}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PlayerWallRun_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerWallRun_2
       rect:
         serializedVersion: 2
         x: 389
@@ -74,9 +106,12 @@ TextureImporter:
         width: 171
         height: 251
       alignment: 9
-      pivot: {x: .769999981, y: .689999998}
+      pivot: {x: 0.77, y: 0.69}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PlayerWallRun_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PlayerWallRun_3
       rect:
         serializedVersion: 2
         x: 566
@@ -84,7 +119,12 @@ TextureImporter:
         width: 166
         height: 263
       alignment: 9
-      pivot: {x: .769999981, y: .689999998}
+      pivot: {x: 0.77, y: 0.69}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
