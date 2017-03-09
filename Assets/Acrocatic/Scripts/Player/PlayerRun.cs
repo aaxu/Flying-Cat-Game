@@ -5,6 +5,8 @@ namespace Acrocatic {
 	// Class that controls the running mechanic for the player.
 	public class PlayerRun : MonoBehaviour {
 		// Public variables.
+        [Tooltip("When you enable this variable, the player will be constantly running.")]
+        public bool alwaysRunning = true;
 		[Tooltip("When you enable this variable, the player only 'runs' when pressing the Run input. If you disable this variable, running is the default state while moving.")]
 		public bool pressToRun = true;
 		[Tooltip("Set the player's maximum walking speed. This is only used when Press To Run is enabled.")]
@@ -21,12 +23,20 @@ namespace Acrocatic {
 		void Start () {
 			// Setting up references.
 			player = GetComponent<Player>();
+            if (alwaysRunning) {
+                runSpeed = 0f;
+            }
 		}
 
 		// This function is called every fixed framerate frame.
 		void FixedUpdate () {
 			// Cache the run input.
-			bool running = Input.GetButton("Run");
+            bool running;
+            if (alwaysRunning) {
+                running = true;
+            } else {
+                running = Input.GetButton("Run");
+            }
 
 			// Get the current speed.
 			float speed = GetSpeed();
@@ -52,8 +62,15 @@ namespace Acrocatic {
 		// Get the current speed for the player.
 		public float GetSpeed(bool withPlatform = true) {
 			// Cache the horizontal input, run input and speed.
-			bool running = Input.GetButton("Run");
-			float speed = runSpeed;
+            bool running;
+            float speed;
+            if (alwaysRunning) {
+                running = true;
+                speed = 0f;
+            } else {
+                running = Input.GetButton("Run");
+                speed = runSpeed;
+            }
 
 			// If a button needs to be pressed to run...
 			if (pressToRun) {

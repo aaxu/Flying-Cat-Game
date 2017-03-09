@@ -86,7 +86,7 @@ namespace Acrocatic {
 
 		// Use this for initialization.
 		void Start () {
-			// Setting up references.
+            // Setting up references.
 			rigidbody = GetComponent<Rigidbody2D>();
 			groundCheck = transform.Find("groundCheck");
 			frontCheckTop = new GameObject("frontCheckTop");
@@ -149,22 +149,33 @@ namespace Acrocatic {
 
 		// Update is called once per frame.
 		void Update() {
-			// Cache the horizontal input.
-			hor = Input.GetAxis("Horizontal");
 
 			// Set the animator values.
-			animator.SetBool("grounded", grounded);
-			animator.SetBool("walking", walking);
-			animator.SetBool("crouching", crouching);
-			animator.SetBool("sliding", sliding);
-			animator.SetBool("dashing", dashing);
-			animator.SetBool("falling", falling);
-			animator.SetBool("wall", stuckToWall);
-			animator.SetBool("onLadder", onLadder);
-			animator.SetBool("jumpingThrough", jumpingThrough);
-			animator.SetFloat("horizontal", Mathf.Abs(hor));
-			animator.SetFloat("xSpeed",  Mathf.Abs(rigidbody.velocity.x));
-			animator.SetFloat("ySpeed", rigidbody.velocity.y);
+            if (playerRun.alwaysRunning) {
+                // Cache the horizontal input.
+                hor = 1;
+                animator.SetBool("crouching", false);
+                animator.SetBool("grounded", grounded);
+                animator.SetBool("walking", false);
+                animator.SetFloat("horizontal", Mathf.Abs(hor));
+
+            } else {
+                // Cache the horizontal input.
+                hor = Input.GetAxis("Horizontal");
+
+                animator.SetBool("grounded", grounded);
+                animator.SetBool("walking", walking);
+                animator.SetBool("crouching", crouching);
+                animator.SetBool("sliding", sliding);
+                animator.SetBool("dashing", dashing);
+                animator.SetBool("falling", falling);
+                animator.SetBool("wall", stuckToWall);
+                animator.SetBool("onLadder", onLadder);
+                animator.SetBool("jumpingThrough", jumpingThrough);
+                animator.SetFloat("horizontal", Mathf.Abs(hor));
+                animator.SetFloat("xSpeed", Mathf.Abs(rigidbody.velocity.x));
+                animator.SetFloat("ySpeed", rigidbody.velocity.y);
+            }
 
 			// The player is grounded if a circle at the groundcheck position overlaps anything on the ground layer.
 			// Only perform the check if the player is not on a platform.
