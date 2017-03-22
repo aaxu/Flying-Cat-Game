@@ -7,7 +7,7 @@ namespace Acrocatic {
 		public bool playerOnPlatform = false;		// Check if the player is standing on the platform.
 		[HideInInspector]
 		public Rigidbody2D rigidbody;				// Cache the rigidbody of the platform.
-        public float speed = -3f;
+        public float speed = -7f;
 
 		// Public variables.
 		[Tooltip("Select the platform's types (more than one can be chosen).")]
