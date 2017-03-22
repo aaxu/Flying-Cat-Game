@@ -83,6 +83,7 @@
     <Compile Include="Assets\Acrocatic\Scripts\General\ShowCollider.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Platforms\JumpThroughDown.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Platforms\JumpThroughUp.cs" />
+    <Compile Include="Assets\Acrocatic\Scripts\Platforms\LoopPlatform.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Platforms\Platform.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Platforms\PlatformJumpThrough.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Platforms\PlatformMove.cs" />
@@ -96,7 +97,6 @@
     <Compile Include="Assets\Acrocatic\Scripts\Player\PlayerPlatform.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Player\PlayerRun.cs" />
     <Compile Include="Assets\Acrocatic\Scripts\Player\PlayerWall.cs" />
-    <Compile Include="Assets\LoopPlatform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

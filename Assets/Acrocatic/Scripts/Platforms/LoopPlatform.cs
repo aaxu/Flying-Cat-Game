@@ -13,6 +13,8 @@ public class LoopPlatform : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rgbd = GetComponent<Rigidbody2D>();
+        Vector2 currentPos = rgbd.transform.position;
+        rgbd.transform.position = new Vector2(currentPos.x, Random.Range(-1f, 4f));
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class LoopPlatform : MonoBehaviour {
         {
             Player playerScript = player.GetComponent<Player>();
             Rigidbody2D pos = playerScript.rigidbody;
-            Vector2 newPosition = new Vector2(pos.transform.position.x + spawnDistanceOffset, Random.Range(-1f, 5f));
+            Vector2 newPosition = new Vector2(pos.transform.position.x + spawnDistanceOffset, Random.Range(-1f, 4f));
             rgbd.transform.position = newPosition;
             timeSinceLastSpawned = 0;
         }

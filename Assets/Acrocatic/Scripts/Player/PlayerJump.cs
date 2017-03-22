@@ -14,9 +14,13 @@ namespace Acrocatic {
 		public int jumps;										// Count how many jumps are currently allowed.
 		[HideInInspector]
 		public bool walkingOnJump;								// Remember if the player was walking or running when the jump was initialized.
+        [HideInInspector]
+        private float timeBeforeRestoreXPosition = 0;
+        [HideInInspector]
+        private float restoreDelay = 1.0f;
 
-		// Public variables.
-		[System.Serializable]
+        // Public variables.
+        [System.Serializable]
 		public class SinglePressToJump {
 			[Tooltip("Set the player's jump force.")]
 			public float jumpForce = 400f;
@@ -72,9 +76,11 @@ namespace Acrocatic {
 		public DoubleJumping doubleJumping;
 		[Tooltip("All variables used for movement in the air are located here.")]
 		public AirMovement airMovement;
+        [Tooltip("This allows you to experience drag as you hold the jump button.")]
+        public bool airDrag = true;
 
-		// Private variables.
-		private Player player;									// Get the Player class.
+        // Private variables.
+        private Player player;									// Get the Player class.
 		private bool doubleJump = false;						// Check if the player is performing a double jump.
 		private bool initialJump = false;						// Used for holdToJumpHigher to make the player perform an initial jump.
 		private float jumpTimer;								// Used for the holdToJumpHigher jumps. Determines how long the player can jump.
@@ -111,7 +117,8 @@ namespace Acrocatic {
 
 		// This function is called every fixed framerate frame.
 		void FixedUpdate () {
-			// If the player should jump...
+            // If the player should jump...
+            player.rigidbody.gravityScale = 2;
 			if(jump) {
 				// If the player is jumping down a platform and is doing the first jump...
 				if (player.jumpDown && jumps == doubleJumping.totalJumps) {
@@ -159,45 +166,59 @@ namespace Acrocatic {
 
 				// If you need to hold the Jump input to jump higher...
 				if (jumpType == JumpType.HoldToJumpHigher) {
-					// When there is an initial jump...
-					if (initialJump) {
-						// ... set the y velocity to the player's initial jump value.
-						float yVel = jumpFactor * (doubleJump ? holdToJumpHigher.initialDoubleJump : holdToJumpHigher.initialJump);
+                    // When there is an initial jump...
+                    if (initialJump)
+                    {
+                        // ... set the y velocity to the player's initial jump value.
+                        float yVel = jumpFactor * (doubleJump ? holdToJumpHigher.initialDoubleJump : holdToJumpHigher.initialJump);
 
-						// If the player is on a moving platform...
-						if (player.OnMovingPlatform()) {
-							// ... get the current platform.
-							GameObject platform = player.GetPlatform();
-							Rigidbody2D platformRigidbody = platform.GetComponent<Rigidbody2D>();
-							// If the platform's Y velocity is greater than 0...
-							if (platformRigidbody.velocity.y > 0) {
-								// ... make sure the y velocity of this platform is taken into account when jumping.
-								yVel += platformRigidbody.velocity.y;
-							}
-						}
+                        // If the player is on a moving platform...
+                        if (player.OnMovingPlatform())
+                        {
+                            // ... get the current platform.
+                            GameObject platform = player.GetPlatform();
+                            Rigidbody2D platformRigidbody = platform.GetComponent<Rigidbody2D>();
+                            // If the platform's Y velocity is greater than 0...
+                            if (platformRigidbody.velocity.y > 0)
+                            {
+                                // ... make sure the y velocity of this platform is taken into account when jumping.
+                                yVel += platformRigidbody.velocity.y;
+                            }
+                        }
 
-						// If the player is on a platform...
-						if (player.OnPlatform()) {
-							// Set the moving platform to null.
-							player.UnstickFromPlatform();
-						}
+                        // If the player is on a platform...
+                        if (player.OnPlatform())
+                        {
+                            // Set the moving platform to null.
+                            player.UnstickFromPlatform();
+                        }
 
-						// Make sure the player's velocity is set.
-						player.SetYVelocity(yVel);
+                        // Make sure the player's velocity is set.
+                        player.SetYVelocity(yVel);
 
-						// Set initialJump to false.
-						initialJump = false;
-					// When the jump button is being pressed and the timer isn't finished yet...
-					} else if (Input.GetButton("Jump") && jumpTimer > 0) {
-						// ... decrease the timer's value.
-						jumpTimer -= Time.deltaTime;
+                        // Set initialJump to false.
+                        initialJump = false;
+                        // When the jump button is being pressed and the timer isn't finished yet...
+                    }
+                    else if (Input.GetButton("Jump") && jumpTimer > 0)
+                    {
+                        // ... decrease the timer's value.
+                        jumpTimer -= Time.deltaTime;
+                        // Set the Y Force for the player.
+                        player.rigidbody.AddForce(new Vector2(0f, jumpFactor * (doubleJump ? holdToJumpHigher.doubleJumpForce : holdToJumpHigher.jumpForce)));
 
-						// Set the Y Force for the player.
-						player.rigidbody.AddForce(new Vector2(0f, jumpFactor * (doubleJump ? holdToJumpHigher.doubleJumpForce : holdToJumpHigher.jumpForce)));
-					// When the timer is finished or the jump button isn't being pressed...
-					} else {
-						// ... reset the jumping variables.
-						ResetJumpVars();
+                    }
+                    // Holding the jump button creates drag
+                    else if (Input.GetButton("Jump") && airDrag)
+                    {
+                        player.rigidbody.gravityScale = 1.1f;
+                        timeBeforeRestoreXPosition = 0;
+                        player.rigidbody.transform.position = new Vector2(player.rigidbody.transform.position.x - Time.deltaTime, player.rigidbody.transform.position.y);
+
+                    // When the timer is finished or the jump button isn't being pressed...
+                    } else {
+                        // ... reset the jumping variables.
+                        ResetJumpVars();
 					}
 				// Or else if you need a single press to perform a jump...
 				} else {
@@ -214,7 +235,16 @@ namespace Acrocatic {
 					ResetJumpVars();
 				}
 			}
-		}
+            else
+            {
+                timeBeforeRestoreXPosition += Time.deltaTime;
+                //Restore position to default x position
+                if (player.rigidbody.transform.position.x < player.defaultXPosition && timeBeforeRestoreXPosition > restoreDelay)
+                {
+                    player.rigidbody.transform.position = new Vector2(Mathf.Min(player.rigidbody.transform.position.x + 1 * Time.deltaTime, player.defaultXPosition), player.rigidbody.transform.position.y);
+                }
+            }
+        }
 
 		// Reset the jumping variables.
 		void ResetJumpVars() {

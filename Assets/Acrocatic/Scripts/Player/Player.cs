@@ -44,6 +44,8 @@ namespace Acrocatic {
 		public bool jumpingThrough = false;			// Determines if the player is jumping through a platform.
 		[HideInInspector]
 		public Rigidbody2D rigidbody;				// Cache the rigidbody of the player.
+        [HideInInspector]
+        public float defaultXPosition;               // Keep track of the default X position.
 		
 		// Public variables.
 		[Tooltip("Select the direction in which the sprites are facing.")]
@@ -131,14 +133,14 @@ namespace Acrocatic {
 				ChangeHitbox("jump");
 			}
 
-			// If the player is stuck to a wall or on a ladder.
-			if (stuckToWall || onLadder) {
-				// ... set the gravity scale to 0.
-				rigidbody.gravityScale = 0;
-			} else {
-				// Reset the gravity scale.
-				rigidbody.gravityScale = gravityScale;
-			}
+			//// If the player is stuck to a wall or on a ladder.
+			//if (stucktowall || onladder) {
+			//	// ... set the gravity scale to 0.
+			//	rigidbody.gravityscale = 0;
+			//} else {
+			//	// reset the gravity scale.
+			//	rigidbody.gravityscale = gravityscale;
+			//}
 
 			// If the groundedXVelocity is active and keepVelocityOnGround is activated...
 			if (keepVelocityOnGround && groundedXVelocity != 0) {
