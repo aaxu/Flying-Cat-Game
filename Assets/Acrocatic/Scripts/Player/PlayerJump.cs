@@ -78,6 +78,8 @@ namespace Acrocatic {
 		public AirMovement airMovement;
         [Tooltip("This allows you to experience drag as you hold the jump button.")]
         public bool airDrag = true;
+        [Tooltip("This allows you to adjusts the vertical drag you experience by setting the gravity scale.")]
+        public float airDragGravityScale = 1.1f;
 
         // Private variables.
         private Player player;									// Get the Player class.
@@ -211,7 +213,7 @@ namespace Acrocatic {
                     // Holding the jump button creates drag
                     else if (Input.GetButton("Jump") && airDrag)
                     {
-                        player.rigidbody.gravityScale = 1.1f;
+                        player.rigidbody.gravityScale = airDragGravityScale;
                         timeBeforeRestoreXPosition = 0;
                         player.rigidbody.transform.position = new Vector2(player.rigidbody.transform.position.x - Time.deltaTime, player.rigidbody.transform.position.y);
 

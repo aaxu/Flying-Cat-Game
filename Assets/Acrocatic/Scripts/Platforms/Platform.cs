@@ -8,6 +8,9 @@ namespace Acrocatic {
 		[HideInInspector]
 		public Rigidbody2D rigidbody;				// Cache the rigidbody of the platform.
         public float speed = -7f;
+        public float maxSpeed = -15f;
+        private float initSpeed = -7f;
+        private float initMaxSpeed = -15f;
 
 		// Public variables.
 		[Tooltip("Select the platform's types (more than one can be chosen).")]
@@ -23,6 +26,8 @@ namespace Acrocatic {
 			rigidbody = GetComponent<Rigidbody2D>();
 			sinking = GetComponent<PlatformSink>();
 			initialPosition = transform.position;
+            speed = initSpeed;
+            maxSpeed = initMaxSpeed;
 		}
 		
 		// Update is called once per frame.
